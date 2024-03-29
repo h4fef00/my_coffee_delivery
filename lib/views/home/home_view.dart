@@ -40,15 +40,9 @@ class _HomeViewState extends State<HomeView> {
     return Column(
       children: [
         const SearchBarWidget(),
-        // CategoriesCard(
-        //   selectedCat: cat ?? "",
-        // ),
         SellerList(
           sellers: sellersList,
         ),
-        // ProductsList(
-        //   filteredProducts: filteredProducts,
-        // ),
       ],
     );
   }

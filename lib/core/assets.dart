@@ -14,7 +14,11 @@ class Assets {
   static const String soda = "assets/jpg/soda.jpg";
   static const String birraPeroniGran = "assets/jpg/peroniGranRiserva.jpg";
   static const String nastro = "assets/jpg/nastroAzzurro.jpg";
-  static const String peroniRossa = "assets/jpg/peroni.png";
+  static const String peroniRossa = "assets/png/peroni.png";
+  static const String cocaCola = "assets/jpg/cocaCola.jpg";
+  static const String sprite = "assets/jpg/sprite.jpg";
+  static const String berryTea = "assets/jpg/berryTea.jpg";
+  static const String peachTea = "assets/jpg/peachTea.jpg";
 
   // background venditori
   static const String pub = "assets/jpg/venditori/pub.jpg";

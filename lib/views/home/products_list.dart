@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_coffee_delivery/models/product.dart';
-import 'package:my_coffee_delivery/views/single_product/single_product_view.dart';
+import 'package:my_coffee_delivery/models/seller.dart';
+import 'package:my_coffee_delivery/views/home/details/seller_info_view.dart';
+import 'package:my_coffee_delivery/views/home/single_product_view.dart';
 
 class ProductsList extends StatelessWidget {
-  const ProductsList({super.key, required this.products});
+  const ProductsList(
+      {super.key, required this.products, required this.sellerData});
   final List<Product> products;
+  final Seller sellerData;
+
   final Widget separator = const Text(" • ");
 
   void _goToSingle(BuildContext context, Product product) {
@@ -18,11 +23,28 @@ class ProductsList extends StatelessWidget {
     );
   }
 
+  void _goToDetailsSeller(BuildContext context, Seller seller) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (ctx) => SellerInfo(
+          sellerData: sellerData,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("name"),
+        title: Text(sellerData.name),
+        actions: [
+          IconButton(
+            onPressed: () => _goToDetailsSeller(context, sellerData),
+            icon: const Icon(Icons.info),
+          ),
+        ],
       ),
       body: Expanded(
         child: GridView.count(

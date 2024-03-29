@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:my_coffee_delivery/models/seller.dart';
-import 'package:my_coffee_delivery/views/widgets/products_list.dart';
+import 'package:my_coffee_delivery/views/home/products_list.dart';
 
-class SellerList extends StatefulWidget {
+class SellerList extends StatelessWidget {
   const SellerList({super.key, required this.sellers});
   final List<Seller> sellers;
 
-  @override
-  State<SellerList> createState() => _SellerListState();
-}
-
-class _SellerListState extends State<SellerList> {
   final Widget separator = const Text(" • ");
 
-  void _goToSingle(BuildContext context, Seller sellers) {
+  void _goToProductsList(BuildContext context, Seller sellers) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (ctx) => ProductsList(
           products: sellers.products,
+          sellerData: sellers,
         ),
       ),
     );
@@ -33,12 +29,15 @@ class _SellerListState extends State<SellerList> {
         childAspectRatio: (1 / .4),
         shrinkWrap: true,
         children: List.generate(
-          widget.sellers.length,
+          sellers.length,
           (i) {
-            var seller = widget.sellers[i];
-            var category = seller.products[i];
+            var singleSeller = sellers[i];
+            // var category = seller.products[i];
+            // problema indice categorie che è diverso da quello dei seller
             return InkWell(
-              onTap: () => _goToSingle(context, seller),
+              onTap: () {
+                _goToProductsList(context, singleSeller);
+              },
               child: Card(
                 child: Container(
                   margin: const EdgeInsets.all(5),
@@ -53,7 +52,7 @@ class _SellerListState extends State<SellerList> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
-                                seller.img,
+                                singleSeller.img,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -63,7 +62,7 @@ class _SellerListState extends State<SellerList> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 70),
                         child: Text(
-                          seller.name,
+                          singleSeller.name,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 30,
@@ -83,18 +82,18 @@ class _SellerListState extends State<SellerList> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 50),
-                        child: SizedBox(
-                          child: Text(
-                            category.category,
-                            style: TextStyle(
-                              color: Colors.white,
-                              background: Paint()..color = Colors.grey,
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(bottom: 50),
+                      //   child: SizedBox(
+                      //     child: Text(
+                      //       category.category,
+                      //       style: TextStyle(
+                      //         color: Colors.white,
+                      //         background: Paint()..color = Colors.grey,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

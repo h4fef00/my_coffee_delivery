@@ -9,6 +9,7 @@ class Seller {
     required this.telefono,
     required this.email,
     required this.priceConsegna,
+    required this.minutes,
     required this.products,
   });
   final String name;
@@ -18,5 +19,6 @@ class Seller {
   final String telefono;
   final String email;
   final String priceConsegna;
+  final int minutes;
   final List<Product> products;
 }

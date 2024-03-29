@@ -18,7 +18,7 @@ class Assets {
   static const String cocaCola = "assets/jpg/cocaCola.jpg";
   static const String sprite = "assets/jpg/sprite.jpg";
   static const String berryTea = "assets/jpg/berryTea.jpg";
-  static const String peachTea = "assets/jpg/peachTea.jpg";
+  static const String peachTea = "assets/png/bubble_tea.png";
 
   // background venditori
   static const String pub = "assets/jpg/venditori/pub.jpg";

@@ -48,7 +48,7 @@ class SellerList extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Expanded(
+                          Flexible(
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
@@ -82,18 +82,6 @@ class SellerList extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(bottom: 50),
-                      //   child: SizedBox(
-                      //     child: Text(
-                      //       category.category,
-                      //       style: TextStyle(
-                      //         color: Colors.white,
-                      //         background: Paint()..color = Colors.grey,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

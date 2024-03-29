@@ -37,7 +37,7 @@ class SellerInfo extends StatelessWidget {
               children: [
                 Text(
                   sellerData.name,
-                  style: const TextStyle(
+                  style: GoogleFonts.aBeeZee(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
                   ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:my_coffee_delivery/models/product.dart';
 
 class SingleProductView extends StatefulWidget {
@@ -61,42 +60,6 @@ class _SingleProductViewState extends State<SingleProductView> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      children: [
-                        const Icon(
-                          Icons.lock_clock,
-                          color: Colors.brown,
-                        ),
-                        Text(
-                          '${widget.product.minutes.toString()} minuti',
-                          style: const TextStyle(
-                            color: Colors.brown,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        const Icon(
-                          Icons.motorcycle,
-                          color: Colors.brown,
-                        ),
-                        Text(
-                          widget.product.price.toString(),
-                          style: const TextStyle(
-                            color: Colors.brown,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              )
             ],
           ),
         ),

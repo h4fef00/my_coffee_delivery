@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:my_coffee_delivery/models/product.dart';
 import 'package:my_coffee_delivery/models/seller.dart';
 import 'package:my_coffee_delivery/views/home/details/seller_info_view.dart';
@@ -11,6 +12,7 @@ class ProductsList extends StatelessWidget {
   final Seller sellerData;
 
   final Widget separator = const Text(" • ");
+  final Widget margin15 = const SizedBox(height: 15);
 
   void _goToSingle(BuildContext context, Product product) {
     Navigator.push(
@@ -38,7 +40,7 @@ class ProductsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(sellerData.name),
+        title: Text('Prodotti di ${sellerData.name}'),
         actions: [
           IconButton(
             onPressed: () => _goToDetailsSeller(context, sellerData),
@@ -46,104 +48,152 @@ class ProductsList extends StatelessWidget {
           ),
         ],
       ),
-      body: Expanded(
-        child: GridView.count(
-          crossAxisCount: 1,
-          scrollDirection: Axis.vertical,
-          childAspectRatio: (1 / .4),
-          shrinkWrap: true,
-          children: List.generate(
-            products.length,
-            (i) {
-              var product = products[i];
-              return InkWell(
-                onTap: () => _goToSingle(context, product),
-                child: Card(
-                  child: Container(
-                    height: 190,
-                    margin: const EdgeInsets.all(5),
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                    ),
-                    child: Stack(
+      body: ListView(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            child: Image.asset(
+              sellerData.img,
+              fit: BoxFit.contain,
+              width: double.infinity,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  sellerData.name,
+                  style: GoogleFonts.aBeeZee(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
+                ),
+                margin15,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    // recensioni statiche
+                    const Column(
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(
-                              child: Image.asset(
-                                product.image,
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  product.name,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  product.category,
-                                  style: const TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                    backgroundColor:
-                                        Color.fromARGB(255, 223, 223, 223),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.motorcycle,
-                                          color: Colors.brown,
-                                        ),
-                                        Text(
-                                          product.price.toString(),
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.brown,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    separator,
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      '${product.minutes.toString()} minuti',
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
+                        Icon(
+                          Icons.thumb_up,
+                          color: Colors.brown,
+                        ),
+                        Text(
+                          '85%',
+                          style: TextStyle(
+                            color: Colors.brown,
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                    Column(
+                      children: [
+                        const Icon(
+                          Icons.lock_clock,
+                          color: Colors.brown,
+                        ),
+                        Text(
+                          '${sellerData.minutes} minuti',
+                          style: const TextStyle(
+                            color: Colors.brown,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        const Icon(
+                          Icons.motorcycle,
+                          color: Colors.brown,
+                        ),
+                        Text(
+                          sellerData.priceConsegna,
+                          style: const TextStyle(
+                            color: Colors.brown,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              );
-            },
-          ),
-        ),
+                margin15,
+                ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: sellerData.products.length,
+                  itemBuilder: (context, index) {
+                    var product = sellerData.products[index];
+                    return InkWell(
+                      onTap: () => _goToSingle(context, product),
+                      child: Card(
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          height: 120,
+                          padding: const EdgeInsets.all(0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                /*flex: 6,*/
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                        product.image,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const Spacer(
+                                flex: 1,
+                              ),
+                              Expanded(
+                                flex: 14,
+                                child: Container(
+                                  padding: const EdgeInsets.only(
+                                    top: 5,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        product.name,
+                                        style: const TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Flexible(
+                                            child: Text(
+                                              overflow: TextOverflow.ellipsis,
+                                              product.description,
+                                              maxLines: 3,
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

@@ -157,10 +157,11 @@ class ProductsList extends StatelessWidget {
                                   padding: const EdgeInsets.only(
                                     top: 5,
                                   ),
-                                  child: Column(
+                                  child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         product.name,
@@ -168,7 +169,20 @@ class ProductsList extends StatelessWidget {
                                             fontSize: 20.0,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      Row(
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 16),
+                                        child: Text(
+                                          product.price,
+                                          style: const TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                      ),
+
+                                      /*Row(
                                         children: [
                                           Flexible(
                                             child: Text(
@@ -178,7 +192,7 @@ class ProductsList extends StatelessWidget {
                                             ),
                                           ),
                                         ],
-                                      )
+                                      )*/
                                     ],
                                   ),
                                 ),
@@ -192,7 +206,7 @@ class ProductsList extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

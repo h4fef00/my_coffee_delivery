@@ -21,6 +21,7 @@ class Product {
   bool isFavorite;
   int quantity;
 
+// decodifica una stringa json in un oggetto
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
         name: json["name"],
@@ -33,6 +34,8 @@ class Product {
         isFavorite: json["isFavorite"],
       );
 
+// conversione in json
+// crea una map dove ogni valore corrisponde alla chiave
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,

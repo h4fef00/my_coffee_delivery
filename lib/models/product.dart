@@ -8,6 +8,7 @@ class Product {
     required this.description,
     required this.price,
     required this.quantity,
+    required this.isFavorite,
   });
 
   final String id;
@@ -17,5 +18,30 @@ class Product {
   final String categoryIcon;
   final String image;
   final String description;
+  bool isFavorite;
   int quantity;
+
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+        id: json["id"],
+        name: json["name"],
+        price: json["price"],
+        category: json["category"],
+        categoryIcon: json["categoryIcon"],
+        image: json["image"],
+        description: json["description"],
+        quantity: json["quantity"],
+        isFavorite: json["isFavorite"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "price": price,
+        "category": category,
+        "categoryIcon": categoryIcon,
+        "image": image,
+        "description": description,
+        "quantity": quantity,
+        "isFavorite": isFavorite,
+      };
 }

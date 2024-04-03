@@ -37,21 +37,24 @@ class _SingleProductViewState extends State<SingleProductView> {
   }
 
   void _addToCart(Product prod) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> cartItemsShared = [];
-    cartItemsShared.addAll({
-      prod.name,
-      prod.image,
-      prod.quantity.toString(),
-      prod.category,
-      prod.categoryIcon,
-      prod.description,
-      prod.id,
-      prod.price,
+    setState(() {
+      if (!cart.contains(prod)) {
+        cart.add(prod);
+      }
     });
-    await prefs.setStringList("cart", cartItemsShared);
-    cart.add(prod);
-    print(cartItemsShared);
+    List<String>? cartItemsShared = prefs!.getStringList("carrello");
+    if (cartItemsShared == null) {
+      cartItemsShared = [];
+    }
+
+    String prodJson = jsonEncode(prod.toJson());
+
+    if (!cartItemsShared.contains(prodJson)) {
+      cartItemsShared.add(prodJson);
+      await prefs!.setStringList("carrello", cartItemsShared);
+    }
+
+    print('${cart.length} lunghezza carrello');
   }
 
   void _addToFavorites(Product prod) async {
@@ -74,7 +77,7 @@ class _SingleProductViewState extends State<SingleProductView> {
       // Salva la lista aggiornata nelle preferenze condivise
     }
     await prefs!.setStringList("favorites2", favoritesList);
-    print(favoritesList.length);
+    print('${favoritesList.length} lunghezza preferiti');
   }
 
   // void _multiplySingleTotal() {

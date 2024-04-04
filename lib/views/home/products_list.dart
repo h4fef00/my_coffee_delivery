@@ -49,7 +49,6 @@ class ProductsList extends StatelessWidget {
         ],
       ),
       body: ListView(
-        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             child: Image.asset(
@@ -119,85 +118,85 @@ class ProductsList extends StatelessWidget {
                     ),
                   ],
                 ),
-                margin15,
-                ListView.builder(
+                const SizedBox(
+                  height: 20,
+                ),
+                // search bar quando cliccata deve prendere tutto lo schermo
+                const SearchBar(
+                  padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                    EdgeInsets.all(8.0),
+                  ),
+                  backgroundColor: MaterialStatePropertyAll<Color>(
+                      Color.fromARGB(255, 238, 238, 238)),
+                  leading: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(Icons.search),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                const ListTile(
+                  title: Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        color: Colors.brown,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "I più venduti",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  trailing: Icon(Icons.chevron_right),
+                ),
+                ListView.separated(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: sellerData.products.length,
+                  separatorBuilder: (context, i) {
+                    return const Divider();
+                  },
                   itemBuilder: (context, index) {
                     var product = sellerData.products[index];
                     return InkWell(
-                      onTap: () => _goToSingle(context, product),
-                      child: Card(
-                        clipBehavior: Clip.antiAlias,
-                        child: Container(
-                          height: 120,
-                          padding: const EdgeInsets.all(0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                /*flex: 6,*/
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                        product.image,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                      onTap: () {
+                        _goToSingle(context, product);
+                      },
+                      child: ListTile(
+                        leading: SizedBox(
+                          // height: 50.0,
+                          width: 40.0,
+                          child: Image.asset(product.image, fit: BoxFit.cover
+                              // fit: BoxFit.fitWidth,
                               ),
-                              const Spacer(
-                                flex: 1,
-                              ),
-                              Expanded(
-                                flex: 14,
-                                child: Container(
-                                  padding: const EdgeInsets.only(
-                                    top: 5,
-                                  ),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        product.name,
-                                        style: const TextStyle(
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 16),
-                                        child: Text(
-                                          product.price,
-                                          style: const TextStyle(
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                      ),
-
-                                      /*Row(
-                                        children: [
-                                          Flexible(
-                                            child: Text(
-                                              overflow: TextOverflow.ellipsis,
-                                              product.description,
-                                              maxLines: 3,
-                                            ),
-                                          ),
-                                        ],
-                                      )*/
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
+                        ),
+                        isThreeLine: true,
+                        title: Text(
+                          product.name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        subtitle: Text(
+                          product.description,
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontSize: 12,
+                          ),
+                        ),
+                        trailing: Text(
+                          product.price,
+                          style: const TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
                           ),
                         ),
                       ),

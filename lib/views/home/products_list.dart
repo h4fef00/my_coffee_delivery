@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_coffee_delivery/models/product.dart';
 import 'package:my_coffee_delivery/models/seller.dart';
-import 'package:my_coffee_delivery/views/home/details/seller_info_view.dart';
+import 'package:my_coffee_delivery/views/home/details/seller_info/seller_info_view.dart';
 import 'package:my_coffee_delivery/views/home/single_product_view.dart';
+import 'package:my_coffee_delivery/views/widgets/search_bar_by_products.dart';
 
 class ProductsList extends StatelessWidget {
   const ProductsList(
@@ -122,16 +123,8 @@ class ProductsList extends StatelessWidget {
                   height: 20,
                 ),
                 // search bar quando cliccata deve prendere tutto lo schermo
-                const SearchBar(
-                  padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
-                    EdgeInsets.all(8.0),
-                  ),
-                  backgroundColor: MaterialStatePropertyAll<Color>(
-                      Color.fromARGB(255, 238, 238, 238)),
-                  leading: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(Icons.search),
-                  ),
+                SearchBarByProducts(
+                  sellerData: sellerData,
                 ),
                 const SizedBox(
                   height: 15,

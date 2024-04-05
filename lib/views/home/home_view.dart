@@ -21,7 +21,9 @@ class _HomeViewState extends State<HomeView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SearchBarWidget(),
+        SearchBarWidget(
+          sellerList: sellersList,
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 10),
           child: Row(

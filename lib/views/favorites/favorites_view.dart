@@ -48,45 +48,54 @@ class _FavoritesViewState extends State<FavoritesView> {
         title: const Text("Preferiti"),
         automaticallyImplyLeading: false,
       ),
-      body: ListView.builder(
-        itemCount: favorites.length,
-        itemBuilder: (context, index) {
-          var prefs = favorites[index];
-          return Card(
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              margin: const EdgeInsets.symmetric(vertical: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      SizedBox(
-                        width: 65,
-                        child: Image.asset(prefs.image),
+      body: Container(
+        padding: const EdgeInsets.all(8),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // divisione dei preferiti per venditore
+              // Padding(
+              //   padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+              //   child: Text(
+              //     "NomeVenditore",
+              //     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              //   ),
+              // ),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: favorites.length,
+                itemBuilder: (context, index) {
+                  var fav = favorites[index];
+                  // var seller = sellers[index].products; mostrare nome seller
+                  return ListTile(
+                    leading: SizedBox(
+                      width: 45,
+                      child: Image.asset(
+                        fav.image,
+                        fit: BoxFit.contain,
                       ),
-                    ],
-                  ),
-                  Text(
-                    prefs.name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      // _addToFavorites(widget.product);
-                    },
-                    icon: prefs.isFavorite
+                    title: Text(
+                      fav.name,
+                      style: const TextStyle(fontSize: 15),
+                    ),
+                    subtitle: const Text(
+                      "Nome venditore",
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 122, 122, 122),
+                      ),
+                    ),
+                    // prezzo dev'essere x quantità, al momento non c'è nessun calcolo
+                    trailing: fav.isFavorite
                         ? const Icon(Icons.favorite)
                         : const Icon(Icons.favorite_border),
-                  ),
-                ],
+                  );
+                },
               ),
-            ),
-          );
-        },
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -18,7 +18,7 @@ class Seller {
   final String indirizzo;
   final String telefono;
   final String email;
-  final String priceConsegna;
+  final double priceConsegna;
   final int minutes;
   final List<Product> products;
 }

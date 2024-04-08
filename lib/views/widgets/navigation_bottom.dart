@@ -61,7 +61,7 @@ class _NavigationBottomState extends State<NavigationBottom> {
           HomeView(),
           FavoritesView(),
           CartView(),
-          ProfileView()
+          ProfileView(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

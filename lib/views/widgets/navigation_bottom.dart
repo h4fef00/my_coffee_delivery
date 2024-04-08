@@ -57,11 +57,11 @@ class _NavigationBottomState extends State<NavigationBottom> {
       backgroundColor: Colors.grey.shade200,
       body: IndexedStack(
         index: _selectedIndex,
-        children: const [
-          HomeView(),
-          FavoritesView(),
+        children: [
+          const HomeView(),
+          const FavoritesView(),
           CartView(),
-          ProfileView(),
+          const ProfileView(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -75,6 +75,7 @@ class _NavigationBottomState extends State<NavigationBottom> {
               (route) => BottomNavigationBarItem(
                 activeIcon: route.iconActive,
                 icon: route.icon,
+                // aggiungere counter che viene mostrato se ci sono elementi
                 label: route.label,
               ),
             )

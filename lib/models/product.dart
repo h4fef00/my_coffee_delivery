@@ -13,7 +13,7 @@ class Product {
 
   final String id;
   final String name;
-  final String price;
+  final double price;
   final String category;
   final String categoryIcon;
   final String image;

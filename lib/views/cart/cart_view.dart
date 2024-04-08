@@ -199,32 +199,32 @@ class CartView extends StatelessWidget {
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Prodotto"),
-                        Text("Prezzo"),
+                        const Text("Prodotto"),
+                        Text(oCcy.format(provider.getTot())),
                       ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Consegna"),
-                        Text("1.99"),
+                        const Text("Consegna"),
+                        Text(oCcy.format(2.00)),
                       ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text.rich(
+                        const Text.rich(
                           TextSpan(
                             children: [
                               TextSpan(text: 'Spese servizio '),
@@ -238,23 +238,25 @@ class CartView extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Text("0.20"),
+                        Text(
+                          oCcy.format(0.20),
+                        ),
                       ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "TOTALE",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
                         Text(
-                          "0.00",
-                          style: TextStyle(
+                          oCcy.format(provider.getTotPlusIva()),
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
                       ],
@@ -262,25 +264,28 @@ class CartView extends StatelessWidget {
                   ),
                   // bottone paga che mostra pagina di conferma ordine x 1 secondo
                   // svuotare carrello (local storage) e array
-                  Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    decoration: const BoxDecoration(
-                      color: Colors.brown,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 120.0, vertical: 20),
-                      child: Text(
-                        "Conferma ordine",
-                        style: GoogleFonts.aBeeZee(
-                          fontSize: 15,
-                          color: Colors.white,
+                  InkWell(
+                    // onTap: provider.getTot(provider.cart),
+                    child: Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      decoration: const BoxDecoration(
+                        color: Colors.brown,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
                         ),
-                        textAlign: TextAlign.center,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 120.0, vertical: 20),
+                        child: Text(
+                          "Conferma ordine",
+                          style: GoogleFonts.aBeeZee(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   ),

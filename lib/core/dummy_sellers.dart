@@ -2,15 +2,6 @@ import 'package:my_coffee_delivery/core/assets.dart';
 import 'package:my_coffee_delivery/models/category.dart';
 import 'package:my_coffee_delivery/models/product.dart';
 import 'package:my_coffee_delivery/models/seller.dart';
-import 'package:uuid/uuid.dart';
-import 'package:intl/intl.dart';
-
-final oCcy = NumberFormat.currency(
-  locale: 'eu',
-  customPattern: '#,### \u00a4',
-  symbol: '€',
-  decimalDigits: 2,
-);
 
 List<Seller> sellers = [
   Seller(

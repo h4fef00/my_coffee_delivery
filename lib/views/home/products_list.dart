@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:my_coffee_delivery/models/product.dart';
 import 'package:my_coffee_delivery/models/seller.dart';
 import 'package:my_coffee_delivery/views/home/details/seller_info/seller_info_view.dart';
@@ -7,10 +8,15 @@ import 'package:my_coffee_delivery/views/home/single_product_view.dart';
 import 'package:my_coffee_delivery/views/widgets/search_bar_by_products.dart';
 
 class ProductsList extends StatelessWidget {
-  const ProductsList(
-      {super.key, required this.products, required this.sellerData});
+  ProductsList({super.key, required this.products, required this.sellerData});
   final List<Product> products;
   final Seller sellerData;
+  final oCcy = NumberFormat.currency(
+    locale: 'eu',
+    customPattern: '#,### \u00a4',
+    symbol: '€',
+    decimalDigits: 2,
+  );
 
   final Widget separator = const Text(" • ");
   final Widget margin15 = const SizedBox(height: 15);
@@ -110,7 +116,7 @@ class ProductsList extends StatelessWidget {
                           color: Colors.brown,
                         ),
                         Text(
-                          sellerData.priceConsegna,
+                          oCcy.format(sellerData.priceConsegna),
                           style: const TextStyle(
                             color: Colors.brown,
                           ),
@@ -185,7 +191,7 @@ class ProductsList extends StatelessWidget {
                           ),
                         ),
                         trailing: Text(
-                          product.price,
+                          oCcy.format(product.price),
                           style: const TextStyle(
                             color: Colors.red,
                             fontWeight: FontWeight.bold,

@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:my_coffee_delivery/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CartView extends StatelessWidget {
-  const CartView({super.key});
+  CartView({super.key});
+
+  final oCcy = NumberFormat.currency(
+    locale: 'eu',
+    customPattern: '#,### \u00a4',
+    symbol: '€',
+    decimalDigits: 2,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +88,7 @@ class CartView extends StatelessWidget {
                         ),
                         // prezzo dev'essere x quantità, al momento non c'è nessun calcolo
                         trailing: Text(
-                          prod.price,
+                          oCcy.format(provider.getSingleTotal(prod)),
                           style: const TextStyle(
                             fontSize: 15,
                           ),

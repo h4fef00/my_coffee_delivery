@@ -1,12 +1,14 @@
 class Assets {
   static const String all = "assets/png/coffe_icon.png";
 
-  // icone per bottoni
+  // icone
   static const String coffeeIcon = "assets/png/coffe_icon.png";
   static const String teaIcon = "assets/png/bubble_tea_icon.png";
   static const String beerIcon = "assets/png/beer_icon.png";
   static const String sodaIcon = "assets/png/soda_icon.png";
-
+  static const String emailIcon = "assets/png/email.png";
+  static const String pswIcon = "assets/png/password.png";
+  static const String userIcon = "assets/png/user.png";
   // img prodotti
   static const String cappuccino = "assets/jpg/cappuccino.jpg";
   static const String birraTuborg = "assets/jpg/birra.jpg";

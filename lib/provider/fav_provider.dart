@@ -35,15 +35,74 @@ class FavProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addToFavorites(Product prod) async {
+  Future<void> addToFavorites(Product prod, BuildContext context) async {
     final indexFav = _favorites.indexWhere((p) => p.id == prod.id);
     prod.isFavorite = !prod.isFavorite;
 
     if (indexFav != -1) {
       _favorites.removeAt(indexFav);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        showCloseIcon: true,
+        content: Row(
+          children: [
+            const Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Text.rich(
+              TextSpan(
+                children: [
+                  WidgetSpan(
+                    child: Text(
+                      '${prod.name} ',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const TextSpan(text: "rimosso ai preferiti"),
+                ],
+              ),
+            ),
+            // Text('${prod.name} aggiunto al carrello'),
+          ],
+        ),
+        backgroundColor: Colors.red,
+      ));
     } else if (prod.isFavorite) {
       _favorites.add(prod);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        showCloseIcon: true,
+        content: Row(
+          children: [
+            const Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Text.rich(
+              TextSpan(
+                children: [
+                  WidgetSpan(
+                    child: Text(
+                      '${prod.name} ',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const TextSpan(text: "aggiunto ai preferiti"),
+                ],
+              ),
+            ),
+            // Text('${prod.name} aggiunto al carrello'),
+          ],
+        ),
+        backgroundColor: Colors.green,
+      ));
     }
+
     await _prefs!.setStringList(
         'favorites', _favorites.map((p) => jsonEncode(p.toJson())).toList());
     notifyListeners();

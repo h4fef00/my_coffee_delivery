@@ -33,7 +33,7 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> add(Product prod) async {
+  Future<void> add(Product prod, BuildContext context) async {
     final existingProductIndex = _cart.indexWhere((p) => p.id == prod.id);
 
     if (existingProductIndex != -1) {
@@ -41,6 +41,35 @@ class CartProvider extends ChangeNotifier {
     } else {
       _cart.add(prod);
     }
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      showCloseIcon: true,
+      content: Row(
+        children: [
+          const Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Text.rich(
+            TextSpan(
+              children: [
+                WidgetSpan(
+                  child: Text(
+                    '${prod.name} ',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const TextSpan(text: "aggiunto al carrello"),
+              ],
+            ),
+          ),
+          // Text('${prod.name} aggiunto al carrello'),
+        ],
+      ),
+      backgroundColor: Colors.green,
+    ));
 
     await _prefs!.setStringList(
         'cart3', _cart.map((p) => jsonEncode(p.toJson())).toList());
@@ -53,7 +82,6 @@ class CartProvider extends ChangeNotifier {
 
   double getSingleTotal(Product prod) {
     double total = prod.quantity * prod.price;
-    notifyListeners();
     return total;
   }
 
